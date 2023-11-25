@@ -51,7 +51,7 @@ class MainHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', contentType)
             self.end_headers()
-            self.wfile.write(data)
+            self.wfile.write((data if type(data) == bytes else data.encode('utf-8')))
 
         except IOError:
             self.send_error(404, 'File Not Found: %s' % self.path)
